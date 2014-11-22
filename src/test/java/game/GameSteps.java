@@ -10,6 +10,7 @@ import cucumber.api.java.en.When;
 public class GameSteps {
 	Restaurant restaurant = null;
 	Player player = null;
+	GameController gameC = null;
 	//------------------- new ----------------------------------------------------
 	
 	@Given("^The \"([^\"]*)\" is created with the name \"([^\"]*)\"$")
@@ -29,7 +30,7 @@ public class GameSteps {
 		else System.out.println("No such " + id + ", sorry.");
 	}
 
-	@And("^The \"([^\"]*)\" is created with the name \"([^\"]*)\"			#setData\\?$")
+/*	@And("^The \"([^\"]*)\" is created with the name \"([^\"]*)\"			#setData\\?$")
 	public void setNameToId2(String id, String name) throws Throwable {
 		if (id == "restaurant")
 			{
@@ -45,11 +46,11 @@ public class GameSteps {
 				
 			}
 		else System.out.println("No such " + id + ", sorry.");
-	}
+	}*/
 
 	@And("^The restaurant budget is initialised to (\\d+)$")
 	public void setBudget(int budget) throws Throwable {	
-		System.out.println("Budget is: " + budget);
+		//System.out.println("Budget is: " + budget);
 		restaurant = new Restaurant();
 		restaurant.setBudget(budget);
 		System.out.println("Budget is now set to: " + restaurant.getBudget());
@@ -57,7 +58,11 @@ public class GameSteps {
 
 	@When("^I start playing restaurant game$")
 	public void whenGameStartsTrigger() throws Throwable {
-		System.out.println("game started"); // should be some trigger here
+		gameC = new GameController();
+		gameC.startGame();
+		if(gameC.getGameStatus()) {System.out.println("done, game is started now");}
+		else {System.out.println("game is not started, something wrong here");}
+		//System.out.println("game started"); // should be some trigger here
 	}
 
 	@Then("^I should see \"([^\"]*)\"$")
