@@ -11,19 +11,35 @@ public class GameSteps {
 	Restaurant restaurant = null;
 	Player player = null;
 	GameController gameC = null;
+	
+	public void init1() {
+		restaurant = new Restaurant();
+//		player = new Player();
+		System.out.println("init1() is done");
+	}
+	
+	public void init2() {
+//		restaurant = new Restaurant();
+		player = new Player();
+		System.out.println("init2() is done");
+	}
+	
 	//------------------- new ----------------------------------------------------
 	
 	@Given("^The \"([^\"]*)\" is created with the name \"([^\"]*)\"$")
 	public void setNameToId(String id, String name) throws Throwable {
-		if (id == "restaurant")
+		
+//		init();
+		
+		if (id.equals("restaurant"))
 			{
-				restaurant = new Restaurant();
+				init1();
 				restaurant.setName(name);
 				System.out.println(id + "is created & name is now set to: " + restaurant.getName());
 			}
-		else if (id == "player")
+		else if (id.equals("player"))
 			{
-				player = new Player();
+				init2();
 				player.setName(name);
 				System.out.println(id + "is created & name is now set to: " + player.getName());
 			}
@@ -51,7 +67,7 @@ public class GameSteps {
 	@And("^The restaurant budget is initialised to (\\d+)$")
 	public void setBudget(int budget) throws Throwable {	
 		//System.out.println("Budget is: " + budget);
-		restaurant = new Restaurant();
+		//restaurant = new Restaurant();
 		restaurant.setBudget(budget);
 		System.out.println("Budget is now set to: " + restaurant.getBudget());
 	}
